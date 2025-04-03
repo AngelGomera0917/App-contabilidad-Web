@@ -1,0 +1,88 @@
+# Pasos realizados para crear este proyecto... 
+
+✅ Paso 1
+
+    ✅ Configuración del servidor
+    ✅ Rutas iniciales
+    ✅ Conexión con una base de datos SQLite
+    ✅ Un sistema simple de autenticación de usuarios
+
+✅ Paso 2
+
+    - Diseñar la interfaz con HTML y CSS.
+    - Añadir login y autenticación.
+    - Implementar ingresos/gastos y reportes.
+
+
+✅ Paso 3
+
+    1️⃣ Instalar dependencias 
+    - pip install flask flask_sqlalchemy werkzeug
+
+    2️⃣ Crear y ejecutar la aplicación
+    - python app.py
+
+    3️⃣ Probar en el navegador
+    - Abre http://127.0.0.1:5000/ en tu navegador.
+
+
+✅ Paso 4
+
+    1️⃣ Formulario de registro funcional (HTML + Bootstrap)
+    2️⃣ Página de inicio de sesión
+    3️⃣ Autenticación de usuarios con Flask-Login
+    - autenticación con Flask-Login
+        ✅ Inicio de sesión (/login)
+        ✅ Panel de usuario (/dashboard)
+        ✅ Cierre de sesión (/logout)
+
+✅ Paso 5
+
+    1️⃣ Crear la ruta para el dashboard y mostrar las transacciones
+    2️⃣ Modificar dashboard.html para listar los ingresos y gastos
+    3️⃣ Calcular y mostrar el balance total
+
+✅ Paso 6
+
+    1️⃣ Consultar las transacciones en la base de datos en la ruta del dashboard.
+    2️⃣ Enviar los datos a dashboard.html con render_template().
+    3️⃣ Modificar dashboard.html para listar ingresos, gastos y calcular el balance.
+
+✅ Paso 7
+
+    1️⃣ Agregar botones para eliminar transacciones.
+    2️⃣ Mejorar el diseño con Bootstrap o CSS.
+    3️⃣ Agregar filtros para mostrar ingresos o gastos por separado.
+
+
+✅ Plan de desarrollo:
+
+    - Definir funcionalidades principales
+
+    - Registro de ingresos y gastos
+
+    - Generación de reportes financieros
+
+    - Gestión de usuarios y roles
+
+    - Exportación de datos a CSV o PDF
+
+    - Dashboard con gráficos
+
+✅ Stack tecnológico
+
+    - Backend: Python + Flask/Django
+
+    - Base de datos: SQLite/PostgreSQL
+
+    - Frontend: HTML, CSS, JavaScript (posible uso de React o Bootstrap)
+
+✅ Estructura del proyecto
+
+    - Modelado de base de datos
+
+    - Rutas y lógica de negocio
+
+    - Interfaz de usuario
+
+
