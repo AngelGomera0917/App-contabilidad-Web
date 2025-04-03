@@ -9,23 +9,38 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2> Registrar Transacción </h2>
+
+        <h2> 
+            Registrar Transacción 
+        </h2> <br>
+
         <form action="/transaccion" method="POST">
             <div class="mb-3">
-                <label class="form-label"> Tipo </label>
+
+                <label class="form-label"> 
+                    Tipo 
+                </label>
+
                 <select name="Tipo" class="form-control" required>
                     <option value="Ingreso"> Ingreso </option>
                     <option value="Gasto"> Gasto </option>
                 </select>
             </div>
+            
             <div class="mb-3">
-                <label class="form-label"> Monto </label>
+                <label class="form-label"> 
+                    Monto 
+                </label>
                 <input type="number" name="Monto" class="form-control" required>
             </div>
+
             <div class="mb-3">
-                <label class="form-label"> Descripción </label>
+                <label class="form-label"> 
+                    Descripción 
+                </label>
                 <input type="text" name="Descripcion" class="form-control" required>
             </div>
+            
             <button type="submit" class="btn btn-primary"> Registrar </button>
             <a href="/dashboard" class="btn btn-link"> Volver a la Pagina Principal </a>
         </form>
