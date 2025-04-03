@@ -102,10 +102,24 @@ def eliminar_transaccion(id):
 @routes.route('/dashboard')
 @login_required
 def dashboard():
-    return f"""
-    <h1> Bienvenid@, {current_user.username} </h1>
-    <a href='{url_for("routes.logout")}' class='btn btn-danger'> Cerrar Sesión </a>
-    """
+    
+    transacciones = Transaccion.query.filter_by(user_id=current_user.id).all()
+    
+    # Verifica que estás calculando y enviando todas las variables necesarias
+    ingresos = sum(t.monto for t in transacciones if t.tipo == 'Ingreso')
+    gastos = sum(t.monto for t in transacciones if t.tipo == 'Gasto')
+    balance = ingresos - gastos  # Calculamos el balance total
+    
+    return render_template('dashboard.html', transacciones=transacciones, ingresos=ingresos, gastos=gastos, balance=balance)
+
+
+    # # Obtener todas las transacciones del usuario autenticado
+    # transacciones = Transaccion.query.filter_by(user_id=current_user.id).all()
+
+    # # Calcular balance total
+    # balance = sum(t.monto if t.tipo == "Ingreso" else -t.monto for t in transacciones) # Calculamos el balance sumando los ingresos y restando los gastos.
+
+    # return render_template('dashboard.html', transacciones=transacciones, balance=balance) # Enviamos transacciones y balance a la plantilla dashboard.html.
 
 
 # Ruta de cierre de sesión
