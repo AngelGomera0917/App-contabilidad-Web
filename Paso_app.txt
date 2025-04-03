@@ -54,6 +54,30 @@
     2️⃣ Mejorar el diseño con Bootstrap o CSS.
     3️⃣ Agregar filtros para mostrar ingresos o gastos por separado.
 
+⚡ Mejoras recomendadas:
+
+1️⃣ Diseño visual:
+
+    Agregar un poco más de espaciado entre los elementos.
+
+    Darle un fondo al "Resumen Financiero" para que destaque más.
+
+    Mejorar el botón de "Eliminar" para que no parezca muy pequeño.
+
+2️⃣ Colores y estilos:
+
+    Un fondo más atractivo en lugar de blanco plano.
+
+    Bordes redondeados a los botones y tarjetas.
+
+3️⃣ Experiencia de usuario:
+
+    Pedir confirmación antes de eliminar una transacción.
+
+    Agregar una animación cuando se elimine un elemento.
+
+
+
 
 ✅ Plan de desarrollo:
 
