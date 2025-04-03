@@ -81,45 +81,57 @@ def transaccion():
 
 
 # Ruta para eliminar una transacción
-@routes.route('/transaccion/<int:id>', methods=['GET', 'POST', 'DELETE'])
+@routes.route('/transaccion/<int:id>/eliminar', methods=['POST'])
 @login_required  # Solo usuarios logueados pueden eliminar
 def eliminar_transaccion(id):
-    
-    from app import db  # ✅ Importa `db` dentro de la función (evita circular import)
-    
+    from app import db  # ✅ Importa `db` dentro de la función (evita import circular)
+
     transaccion = Transaccion.query.get(id)  # Busca la transacción por ID
     
     if not transaccion:
         return jsonify({"error": "Transacción no encontrada"}), 404  # Error si no existe
-    
+
+    # Verificar que la transacción pertenece al usuario actual
+    if transaccion.user_id != current_user.id:
+        return jsonify({"error": "No tienes permiso para eliminar esta transacción"}), 403  # Prohibido
+
     db.session.delete(transaccion)  # Elimina la transacción
     db.session.commit()  # Guarda los cambios
-    
-    return jsonify({"mensaje": "Transacción eliminada correctamente"}), 200  # Respuesta JSON
 
+    return redirect(url_for('routes.dashboard'))  # ✅ Redirigir al dashboard después de eliminar
 
 # Ruta protegida del dashboard
 @routes.route('/dashboard')
 @login_required
 def dashboard():
+    # Obtener el parámetro 'filtro' de la URL, por defecto 'todos'
+    filtro = request.args.get('filtro', 'todos')
     
-    transacciones = Transaccion.query.filter_by(user_id=current_user.id).all()
+    # Filtrar las transacciones según el parámetro 'filtro'
+    if filtro == 'ingresos':
+        transacciones = Transaccion.query.filter_by(user_id=current_user.id, tipo='Ingreso').all()
+    elif filtro == 'gastos':
+        transacciones = Transaccion.query.filter_by(user_id=current_user.id, tipo='Gasto').all()
+    else:
+        transacciones = Transaccion.query.filter_by(user_id=current_user.id).all()  # Mostrar todos si no hay filtro
     
-    # Verifica que estás calculando y enviando todas las variables necesarias
+    # Calcular los ingresos, gastos y el balance total
     ingresos = sum(t.monto for t in transacciones if t.tipo == 'Ingreso')
     gastos = sum(t.monto for t in transacciones if t.tipo == 'Gasto')
-    balance = ingresos - gastos  # Calculamos el balance total
     
-    return render_template('dashboard.html', transacciones=transacciones, ingresos=ingresos, gastos=gastos, balance=balance)
+    # Si el filtro es 'gastos', no restamos el total de los gastos para que no aparezca negativo
+    if filtro == 'gastos':
+        balance = gastos  # Solo mostramos los ingresos cuando el filtro es 'gastos'
+    else:
+        balance = ingresos - gastos  # Calculamos el balance total si el filtro no es 'gastos'
+    
+    # Retornar la plantilla con las transacciones y el resumen financiero
+    return render_template('dashboard.html', 
+                           transacciones=transacciones, 
+                           ingresos=ingresos, 
+                           gastos=gastos, 
+                           balance=balance)
 
-
-    # # Obtener todas las transacciones del usuario autenticado
-    # transacciones = Transaccion.query.filter_by(user_id=current_user.id).all()
-
-    # # Calcular balance total
-    # balance = sum(t.monto if t.tipo == "Ingreso" else -t.monto for t in transacciones) # Calculamos el balance sumando los ingresos y restando los gastos.
-
-    # return render_template('dashboard.html', transacciones=transacciones, balance=balance) # Enviamos transacciones y balance a la plantilla dashboard.html.
 
 
 # Ruta de cierre de sesión
