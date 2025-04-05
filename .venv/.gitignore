@@ -3,3 +3,11 @@
 # Para activar el entorno virtual en Windows de mi application
 .\.venv\Scripts\activate 
 python -m flask run 
+
+# para migrar y actualizar mi base de datos
+
+pip install Flask-Migrate
+# Esto creará una nueva carpeta de migraciones si no existe.
+flask db init 
+flask db migrate -m "Initial migration"
+flask db upgrade
