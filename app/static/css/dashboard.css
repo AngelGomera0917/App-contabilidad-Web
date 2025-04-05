@@ -1,0 +1,93 @@
+/* Estilos generales de mi Dashboard */
+body {
+    background-color: #f4f6f9; /* Fondo suave */
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+}
+
+.container {
+    display: grid;
+    grid-gap: 8px; /* Espaciado entre los elementos */
+    padding: 20px;
+}
+
+
+/* Fondo para la tarjeta de resumen */
+.card {
+    background-color: #ffffff; /* Fondo blanco suave */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+
+}
+
+
+/* Botones */
+.btn {
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 9px 7px; /* Botones más grandes */
+    font-size: 1.1rem;
+}
+
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn-eliminar {
+    background-color: #e74c3c; /* Rojo brillante */
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-eliminar:hover {
+    background-color: #c0392b; /* Color más oscuro al pasar el ratón */
+}
+
+
+/* Estilos para mi logo  */
+.logo-container {
+    /* quiero ponerlo en la esquina superior derecha */
+    position: absolute;
+    top: 10px;
+    margin-bottom: 20px;
+
+}
+
+.logo {
+    width: 200px;  /* Ajusta el tamaño según necesites  */
+    height: 140px; /* Ajusta el tamaño según necesites  */
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+

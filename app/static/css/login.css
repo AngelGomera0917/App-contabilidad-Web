@@ -1,0 +1,68 @@
+/* Estilos generales del login */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+
+}
+
+/* Contenedor del login */
+.login-container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    display: grid;
+    grid-gap: 20px; /* Espaciado entre los elementos */
+    
+}
+
+
+/* Título */
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+/* Estilos de los inputs */
+input {
+    width: 92%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Botón de inicio de sesión */
+.btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+/* Enlace de registro */
+p a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+p a:hover {
+    text-decoration: underline;
+}

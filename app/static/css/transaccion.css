@@ -1,0 +1,55 @@
+body {
+    background-color: #f4f7fc; /* Color de fondo suave */
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-gap: 40px; /* Espaciado entre los elementos */
+    padding: 15px;
+}
+
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Enlace de registro */
+.volver-container {
+    text-align: center; /* Centra el contenido del div */
+    margin-top: 15px; /* Agrega espacio superior */
+}
+

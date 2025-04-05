@@ -1,6 +1,6 @@
 # Define las rutas y vistas
 
-from flask import render_template, request, redirect, url_for, jsonify, Blueprint
+from flask import render_template, request, redirect, url_for, flash, jsonify, Blueprint
 from flask_login import login_user, login_required, logout_user, current_user
 #from app import db
 from app.models import Usuario, Transaccion
@@ -32,12 +32,39 @@ def register():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        
         hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
         new_user = Usuario(username=username, password=hashed_password)
+        
         db.session.add(new_user)
         db.session.commit()
+        
         return redirect(url_for('routes.login'))
     return render_template('register.html')
+    
+    """
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        confirm_password = request.form['confirm_password']
+
+        # 📌 Validación: Las contraseñas deben coincidir
+        if password != confirm_password:
+            flash("⚠️ Las contraseñas no coinciden. Inténtalo de nuevo.", "danger")
+            return redirect(url_for('routes.register'))  # Vuelve a la página de registro
+
+        # 📌 Si las contraseñas coinciden, guardar usuario en la base de datos
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+        nuevo_usuario = Usuario(username=username, email=email, password=hashed_password)
+        db.session.add(nuevo_usuario)
+        db.session.commit()
+
+        flash("✅ Registro exitoso. Ahora puedes iniciar sesión.", "success")
+        return redirect(url_for('routes.login'))  # Redirige a login
+
+    return render_template('register.html')"""
+
 
 
 # Ruta de inicio de sesión
@@ -114,6 +141,9 @@ def dashboard():
         transacciones = Transaccion.query.filter_by(user_id=current_user.id, tipo='Gasto').all()
     else:
         transacciones = Transaccion.query.filter_by(user_id=current_user.id).all()  # Mostrar todos si no hay filtro
+        
+    # usuarios = Usuario.query.all()  # Obtiene todos los usuarios de la base de datos
+    
     
     # Calcular los ingresos, gastos y el balance total
     ingresos = sum(t.monto for t in transacciones if t.tipo == 'Ingreso')
@@ -127,10 +157,11 @@ def dashboard():
     
     # Retornar la plantilla con las transacciones y el resumen financiero
     return render_template('dashboard.html', 
-                           transacciones=transacciones, 
-                           ingresos=ingresos, 
-                           gastos=gastos, 
-                           balance=balance)
+                            # usuarios=usuarios,
+                            transacciones=transacciones,
+                            ingresos=ingresos,
+                            gastos=gastos,
+                            balance=balance)
 
 
 
@@ -141,3 +172,32 @@ def logout():
     logout_user()
     return redirect(url_for('routes.login'))  # Usa 'routes.login' para referenciar la ruta de login
 # Al usar url_for, cambié login y dashboard por routes.login y routes.dashboard respectivamente, porque ahora las rutas están dentro del blueprint routes.
+
+
+# # Ruta para Eliminar un usuario
+# @routes.route('/eliminar_usuario/<int:id>', methods=['GET', 'POST'])
+# @login_required
+# def eliminar_usuario(id):
+#     from app import db  # ✅ Importa `db` dentro de la función (evita circular import)
+#     # Busca el usuario en la base de datos
+#     usuario = Usuario.query.get(id)
+    
+#     if not usuario:
+#         flash("Usuario no encontrado.", "danger")
+#         return redirect(url_for('routes.dashboard'))
+
+#     # Asegurarse de que solo un administrador pueda eliminar usuarios
+#     if not current_user.is_admin:
+#         flash("No tienes permisos para eliminar usuarios.", "danger")
+#         return redirect(url_for('routes.dashboard'))
+    
+#     db.session.delete(usuario)
+#     db.session.commit()
+    
+#     flash("Usuario eliminado correctamente.", "success")
+#     return redirect(url_for('routes.dashboard'))
+
+
+
+
+
