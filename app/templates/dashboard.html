@@ -10,16 +10,47 @@
 
 </head>
 
+<!-- Confirmación para eliminar un usuario -->
 <script>
-    function confirmarEliminacion() {
+    function confirmarEliminacionUsuario() {
+        return confirm("¿Estás seguro de que quieres eliminar este usuario?");
+    }
+</script>
+
+<!-- Confirmación para eliminar una transacción -->
+<script>
+    function confirmarEliminacionTransaccion() {
         return confirm("¿Estás seguro de que quieres eliminar esta transacción?");
     }
 </script>
+
+
+<!-- <script>
+    function confirmarEliminacion() {
+        return confirm("¿Estás seguro de que quieres eliminar esta transacción?");
+    }
+</script> -->
     
     
 <body class="container mt-4">
 
+    <!-- Bloque de mensajes flash con estilo fijo en la parte superior -->
+    <div id="flash-messages" style="position: fixed; top: 0; width: 100%; z-index: 1050;">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+
     <div class="container">
+
         <!-- 📌 Imagen representativa -->
     <div class="logo-container">
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Mi Plataforma Contable" class="logo" width="200" height="200">
@@ -27,7 +58,14 @@
 
     <h1 class="text-center"> <b> Dashboard de Finanzas </b> </h1> <br>
     <br>
-    <h3> Bienvenid@, {{ current_user.username }} </h3>
+
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+        <img src="{{ url_for('static', filename='img/avatar.png') }}" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%;">
+        <h2 style="margin: 0;"> Bienvenid@, {{ current_user.username }} </h2>
+    </div>
+    
+    
+    <!-- <h3> Bienvenid@, {{ current_user.username }} </h3> -->
 
     <!-- Mostrar resumen de ingresos, gastos y balance -->
     <div class="card p-3 mt-3">
@@ -40,9 +78,9 @@
     <br>
     <!-- Filtros para mostrar todos, ingresos o gastos -->
     <div class="mb-3">
-        <a href="{{ url_for('routes.dashboard', filtro='todos') }}" class="btn btn-secondary">Todos</a>
-        <a href="{{ url_for('routes.dashboard', filtro='ingresos') }}" class="btn btn-success">Ingresos</a>
-        <a href="{{ url_for('routes.dashboard', filtro='gastos') }}" class="btn btn-warning">Gastos</a>
+        <a href="{{ url_for('routes.dashboard', filtro='todos') }}" class="btn btn-secondary"> Todos </a>
+        <a href="{{ url_for('routes.dashboard', filtro='ingresos') }}" class="btn btn-success"> Ingresos </a>
+        <a href="{{ url_for('routes.dashboard', filtro='gastos') }}" class="btn btn-warning"> Gastos </a>
     </div>
 
     <!-- Nueva sección: Lista de Usuarios -->
@@ -60,12 +98,17 @@
             {% for usuario in usuarios %}
             <tr>
                 <td>{{ usuario.id }}</td>
-                <td>{{ usuario.nombre }}</td>
+                <td>{{ usuario.username }}</td>
                 <td>{{ usuario.email }}</td>
                 <td>
-                    <form action="{{ url_for('routes.eliminar_usuario', id=usuario.id) }}" method="POST" onsubmit="return confirmarEliminacion()">
-                        <button type="submit" class="btn btn-danger btn-sm"> Eliminar </button>
+                    <!-- Botones de edición y eliminación -->
+                    <form action="{{ url_for('routes.eliminar_usuario', id=usuario.id) }}" method="POST" onsubmit="return confirmarEliminacionUsuario()">
+                        <button class="btn btn-sm btn-danger rounded-pill"> Eliminar </button>
                     </form>
+                    
+
+                        
+                
                 </td>
             </tr>
             {% endfor %}
@@ -74,6 +117,8 @@
     
 
     <!-- Tabla de Transacciones -->
+    <hr class="my-5 border-top border-secondary"> <!-- Línea horizontal para separar las secciones -->
+    
     <h3 class="mt-4"> 
         Historial de Transacciones 
     </h3>
@@ -95,21 +140,29 @@
                     <td>${{ transaccion.monto }}</td>
                     <td>{{ transaccion.descripcion }}</td>
                     <td>
-                        <form action="{{ url_for('routes.eliminar_transaccion', id=transaccion.id) }}" method="post" onsubmit="return confirmarEliminacion()">
-                            <button type="submit" class="btn btn-danger btn-sm"> Eliminar </button>
+                        <!-- Botones de edición y eliminación -->
+                        <form action="{{ url_for('routes.eliminar_transaccion', id=transaccion.id) }}" method="POST" onsubmit="return confirmarEliminacionTransaccion()">
+                            <button class="btn btn-sm btn-danger"> Eliminar </button>
                         </form>
+                        
                         
                     </td>
                     
                 </tr>
 
             {% endfor %}
+
         </tbody>
     </table>
     
     <a href="/transaccion" class="btn btn-primary"> Agregar Transacción </a> <!-- Botón de Agregar transacciones -->
     <a href="/logout" class="btn btn-danger"> Cerrar Sesión </a> <!-- Botón de Cerrar Sesión -->
 
+    <p style="text-align:center; font-size: 13px; color: #999; margin-top: 30px;">
+        &copy; 2025 BalanceStart. Todos los derechos reservados.
+    </p>
+
+    </div> <!-- Fin del contenedor principal -->
 
 </body>
 </html>
