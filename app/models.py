@@ -10,12 +10,18 @@ class Usuario(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)  # Agrega el campo email
-    is_admin = db.Column(db.Boolean, default=False)  # Agregar el atributo is_admin
-    # def __repr__(self):
-    #     return f'<Usuario {self.username}>'
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
+
+    # Relación con Transaccion (evita conflicto con 'usuario')
+    transacciones = db.relationship('Transaccion', backref='usuario_transaccion', lazy=True, cascade="all, delete-orphan")
+
+    def __repr__(self):
+        return f'<Usuario {self.username}>'
 
 
+# Modelo de Transaccion
+# Este modelo representa una transacción financiera de un usuario.
 class Transaccion(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
@@ -25,10 +31,7 @@ class Transaccion(db.Model):
     # fecha = db.Column(db.DateTime, default=datetime.utcnow)
     fecha = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Se actualizará con hora local
     
-    # # 🔥 Esta línea es la que falta
-    # usuario_id = db.Column(db.Integer, db.ForeignKey('usuario.id'), nullable=False)
-    
         # Aquí especificamos la clave foránea correcta
-    usuario = db.relationship('Usuario', backref='transacciones', foreign_keys=[usuario_id])
+    usuario = db.relationship('Usuario', backref='usuario_transaccion', foreign_keys=[usuario_id])
 
     #usuario = db.relationship('Usuario', backref=db.backref('transacciones', lazy=True))
