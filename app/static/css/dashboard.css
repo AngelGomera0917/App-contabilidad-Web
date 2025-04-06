@@ -9,6 +9,7 @@ body {
     display: grid;
     grid-gap: 8px; /* Espaciado entre los elementos */
     padding: 20px;
+    
 }
 
 
@@ -17,7 +18,7 @@ body {
     background-color: #ffffff; /* Fondo blanco suave */
     border-radius: 15px; /* Bordes redondeados */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-
+    /* border-top: 1px solid #ccc; */ /* Línea superior */
 }
 
 
