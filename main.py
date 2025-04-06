@@ -1,4 +1,5 @@
-# Dependencias del proyecto.
+# pagina principal de la aplicacion
+# app/main.py
 
 from app import create_app, db
 from app.models import Usuario, Transaccion
