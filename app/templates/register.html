@@ -43,23 +43,23 @@
             <input type="password" id="confirm_password" name="confirm_password" required>
 
             <!-- Mostrar el checkbox si no hay administradores -->
-            <!-- {% if not administrador_existente %}
+            {% if not administrador_existente %}
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="is_admin" name="is_admin">
                 <label class="form-check-label" for="is_admin"> Registrar como administrador </label>
             </div>
             {% else %}
-                El checkbox no se mostrará si ya existe un administrador 
-                <p>No se puede registrar como administrador. Ya existe un administrador.</p>
+                <!-- El checkbox no se mostrará si ya existe un administrador  -->
+                <p> No se puede registrar como administrador. Ya existe un administrador. </p>
             {% endif %}
 
-            <br> -->
+            <br>
 
                 <!-- Campo para registrar como administrador -->
-            <div class="form-group form-check">
+            <!-- <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="is_admin" name="is_admin">
                 <label class="form-check-label" for="is_admin"> Registrar como administrador </label>
-            </div> <br>
+            </div> <br> -->
 
             <!-- Botón de enviar formulario -->
             <button type="submit" class="btn"> Registrarse </button>
