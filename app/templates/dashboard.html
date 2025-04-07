@@ -56,14 +56,20 @@
         <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Mi Plataforma Contable" class="logo" width="200" height="200">
     </div>
 
-    <h1 class="text-center"> <b> Dashboard de Finanzas </b> </h1> <br>
+    <h1 class="text-center"> <b> BalanceStart 📈 </b> </h1> <br>
     <br>
 
     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
         <img src="{{ url_for('static', filename='img/avatar.png') }}" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%;">
         <h2 style="margin: 0;"> Bienvenid@, {{ current_user.username }} </h2>
     </div>
-    
+
+    <p>
+
+        <img src="https://about.fb.com/es/wp-content/uploads/sites/13/2019/10/new-ig-icon-1.png" alt="Imagen de instagram" style="width: 65px; height: 50px; border-radius: 50%;">
+        
+        <a href="https://www.instagram.com/balance_start?igsh=d3U2cnA3OTF1ZXk5" target="_blank"> Síguenos en Instagram </a>
+    </p>
     
     <!-- <h3> Bienvenid@, {{ current_user.username }} </h3> -->
 
@@ -157,6 +163,7 @@
     
     <a href="/transaccion" class="btn btn-primary"> Agregar Transacción </a> <!-- Botón de Agregar transacciones -->
     <a href="/logout" class="btn btn-danger"> Cerrar Sesión </a> <!-- Botón de Cerrar Sesión -->
+
 
     <p style="text-align:center; font-size: 13px; color: #999; margin-top: 30px;">
         &copy; 2025 BalanceStart. Todos los derechos reservados.
