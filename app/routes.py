@@ -41,8 +41,8 @@ def register():
     
     from app import db  # ✅ Importa `db` dentro de la función (evita circular import)
     
-    # # Verificar si ya existe un administrador en la base de datos
-    # administrador_existente = Usuario.query.filter_by(is_admin=True).first()  # Busca el primer admin
+    # Verificar si ya existe un administrador en la base de datos
+    administrador_existente = Usuario.query.filter_by(is_admin=True).first()  # Busca el primer admin
     
     if request.method == 'POST':
         username = request.form['username']
@@ -59,13 +59,13 @@ def register():
             return redirect(url_for('routes.register'))  # Vuelve a la página de registro
         
         # # Si no hay administradores, permitir que el primer usuario sea admin
-        # if administrador_existente:
-        #     is_admin = False  # Si ya hay un admin, todos los nuevos usuarios serán regulares
-        # else:
-        #     is_admin = True if request.form.get('is_admin') == 'on' else False  # El primer usuario puede ser admin
+        if administrador_existente:
+            is_admin = False  # Si ya hay un admin, todos los nuevos usuarios serán regulares
+        else:
+            is_admin = True if request.form.get('is_admin') == 'on' else False  # El primer usuario puede ser admin
         
         # # Validar si el checkbox fue marcado
-        is_admin = True if request.form.get('is_admin') == 'on' else False
+        # is_admin = True if request.form.get('is_admin') == 'on' else False
         
         
 
@@ -85,7 +85,7 @@ def register():
         flash("✅ Registro exitoso. Ahora puedes iniciar sesión.", "success")
         return redirect(url_for('routes.login'))  # Redirige a login
 
-    return render_template('register.html') #, administrador_existente=administrador_existente
+    return render_template('register.html', administrador_existente=administrador_existente) #, administrador_existente=administrador_existente
 
 """     if request.method == 'POST':
         username = request.form['username']
