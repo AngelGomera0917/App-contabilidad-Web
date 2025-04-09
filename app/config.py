@@ -26,5 +26,5 @@
 
 class Config:
     SECRET_KEY = 'supersecreto'
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///contabilidad.db'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:behlJuzxharVndINsLTgrUchTFZvZiMQ@switchyard.proxy.rlwy.net:21641/railway'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
