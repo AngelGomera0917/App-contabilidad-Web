@@ -24,7 +24,10 @@
 #     app.run(debug=True)
 
 
+import os
+
 class Config:
     SECRET_KEY = 'supersecreto'
-    SQLALCHEMY_DATABASE_URI = "postgresql://postgres:behlJuzxharVndINsLTgrUchTFZvZiMQ@switchyard.proxy.rlwy.net:21641/railway"
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
