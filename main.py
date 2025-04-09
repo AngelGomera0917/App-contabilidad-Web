@@ -10,6 +10,7 @@ app = create_app()
 
 if __name__ == '__main__':
     with app.app_context():
+        print("✅ Creando tablas en la base de datos...")
         db.create_all()  # Crea las tablas si no existen
 
     # ✅ Railway usará su propio puerto, lo leemos desde variables de entorno
