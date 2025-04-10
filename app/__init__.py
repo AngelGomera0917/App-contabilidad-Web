@@ -18,7 +18,7 @@ def create_app():
     
     # Configuración de la app
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'supersecreto')  # Se recomienda usar un SECRET_KEY seguro
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///contabilidad.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///contabilidad.db')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Evitar advertencias
 
     # Inicialización de las extensiones
@@ -28,6 +28,9 @@ def create_app():
 
     # Inicializamos Flask-Migrate aquí
     migrate = Migrate(app, db)
+    
+    # 👇 Importa los modelos para que SQLAlchemy los detecte
+    from . import models
 
     # Importamos y registramos el blueprint de las rutas después de inicializar la base de datos
     from .routes import routes
