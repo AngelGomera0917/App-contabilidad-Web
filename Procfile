@@ -1,2 +1,3 @@
-web: python create_tables.py
+web: gunicorn main:app
+
 
