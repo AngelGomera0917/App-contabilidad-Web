@@ -20,7 +20,7 @@ app = routes  # Esto permite que las rutas se registren correctamente
 # Ruta de inicio
 @routes.route('/')
 def index():
-    return "Bienvenido a la App de Contabilidad"
+    return render_template('index.html')
 
 
 # # Ruta para hacer admin a un usuario
