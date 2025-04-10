@@ -14,7 +14,8 @@ class Usuario(UserMixin, db.Model):
     is_admin = db.Column(db.Boolean, default=False)
 
     # Relación con Transaccion (evita conflicto con 'usuario')
-    transacciones = db.relationship('Transaccion', backref='usuario_transaccion', lazy=True, cascade="all, delete-orphan")
+    transacciones = db.relationship('Transaccion', backref='usuario', lazy=True, cascade="all, delete-orphan")
+
 
     def __repr__(self):
         return f'<Usuario {self.username}>'
@@ -31,7 +32,3 @@ class Transaccion(db.Model):
     # fecha = db.Column(db.DateTime, default=datetime.utcnow)
     fecha = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Se actualizará con hora local
     
-        # Aquí especificamos la clave foránea correcta
-    usuario = db.relationship('Usuario', backref='usuario_transaccion', foreign_keys=[usuario_id])
-
-    #usuario = db.relationship('Usuario', backref=db.backref('transacciones', lazy=True))
